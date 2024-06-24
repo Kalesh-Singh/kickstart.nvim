@@ -491,6 +491,13 @@ require('lazy').setup({
           --  Similar to document symbols, except searches over your entire project.
           map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
+          -- Callers (Imcoming calls)
+          map('<leader>ic', require('telescope.builtin').lsp_incoming_calls, '[I]coming [C]alls')
+
+          -- Callees (Outgoing calls)
+          -- This is not yet imported in clangd but is not nearly as importand as 'Imcoming Calls'
+          map('<leader>oc', require('telescope.builtin').lsp_outgoing_calls, '[O]utgoing [C]alls')
+
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -565,7 +572,7 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
+        clangd = {},
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
