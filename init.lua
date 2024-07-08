@@ -435,6 +435,7 @@ require('lazy').setup({
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
+      'jackguo380/vim-lsp-cxx-highlight', -- Grey out inactive code
 
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -662,6 +663,12 @@ require('lazy').setup({
           index = {
             threads = 0,
             blacklist = { '^build/', '^.git/', '^third_party/' },
+          },
+          clang = {
+            excludeArgs = { '-frounding-math' },
+          },
+          highlight = {
+            lsRanges = true,
           },
         },
         capabilities = capabilities,
