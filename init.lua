@@ -435,6 +435,7 @@ require('lazy').setup({
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
+      'm-pilia/vim-ccls', -- For ccls call hierarchies
       'jackguo380/vim-lsp-cxx-highlight', -- Grey out inactive code
 
       -- Useful status updates for LSP.
@@ -534,6 +535,12 @@ require('lazy').setup({
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+          -- CCLS Extensions
+          map('gcr', ':CclsCallHierarchy<cr>', '[G]oto [C]alle[R]s')
+          map('gce', ':CclsCalleeHierarchy<cr>', '[G]oto [C]alle[E]s')
+          map('<leader>gcr', ':CclsCallHierarchy -float<cr>', '[G]oto [C]alle[R]s')
+          map('<leader>gce', ':CclsCalleeHierarchy -float<cr>', '[G]oto [C]alle[E]s')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
