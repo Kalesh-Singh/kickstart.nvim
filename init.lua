@@ -572,7 +572,7 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        clangd = {},
+        -- clangd = {},
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -628,6 +628,27 @@ require('lazy').setup({
             require('lspconfig')[server_name].setup(server)
           end,
         },
+      }
+      -- Setup CCLS manually
+      --  NOTE: `sudo apt install ccls` works fine
+      --  WARN: `sudo snap install ccls --classic` does not work. There is some issue with the path (softlinks like toybox?)
+      require('lspconfig').ccls.setup {
+        init_options = {
+          cache = {
+            directory = '.ccls-cache',
+            retainInMemory = 1,
+            format = 'json',
+          },
+          index = {
+            threads = 0,
+            blacklist = { '^build/', '^.git/', '^third_party/' },
+          },
+        },
+        capabilities = capabilities,
+        flags = {
+          debounce_text_changes = 150,
+        },
+        cmd = { '/home/kalesh/ccls/Release/ccls' },
       }
     end,
   },
